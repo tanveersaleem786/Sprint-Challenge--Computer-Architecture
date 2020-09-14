@@ -98,24 +98,31 @@ class CPU:
     # AND registerA registerB
     def _and(self, *params):
         self.alu("AND", *params)
+        self.PC += 3
      # OR registerA registerB
     def _or(self, *params):
         self.alu("OR", *params)
+        self.PC += 3
     # XOR registerA registerB
     def _xor(self, *params):
         self.alu("XOR", *params)
+        self.PC += 3
     # NOT register
     def _not(self, *params):
         self.alu("NOT", *params)
+        self.PC += 2
     # Shift the value in registerA left by the number of bits specified in registerB.
     def _shl(self, *params):
         self.alu("SHL", *params)
+        self.PC += 3
     # Shift the value in registerA right by the number of bits specified in registerB.
     def _shr(self, *params):
         self.alu("SHR", *params)
+        self.PC += 3
     # MOD registerA registerB
     def _mod(self, *params):
         self.alu("MOD", *params)
+        self.PC += 3
     # Exit from program
     def _hlt(self, *params):
         self.running = False
@@ -129,8 +136,8 @@ class CPU:
                 self.FL = 0b00000010
             else:
                 self.FL = 0b00000001
-        elif op == "AND":
-            self.reg[reg_a] &= self.reg[reg_b]
+        elif op == "AND":           
+            self.reg[reg_a] = self.reg[reg_a] & self.reg[reg_b]           
         elif op == "OR":
             self.reg[reg_a] |= self.reg[reg_b]
         elif op == "XOR":
